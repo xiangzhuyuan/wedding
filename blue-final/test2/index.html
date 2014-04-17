@@ -61,6 +61,9 @@
     </div>
     <div id="content">
         <img src="album/wall.jpg" title="main">
+		<div id="subtitlehtml">
+			<span style="font-weight: normal; font-size: 18px; ">2013年06月09日</span>
+		</div>
     </div>
     <div id="footer"></div>
 
@@ -179,7 +182,9 @@
 </h3>
 
 <div>
-    <video width="100%" accesskey="" autoplay="autoplay" src="album/demo.mp4"></video>
+    <video id='mv' name='mv' width="100%" accesskey="" src="album/demo.mp4">
+    	 Your browser does not support the <code>video</code> element.
+    </video>
 </div>
 <h3>
     <div name="button4" id="button4" class="button">
@@ -301,10 +306,17 @@
 //           console.log(ui.newHeader);
 //           console.log(ui.oldHeader);
         });
-        $("#accordion").bind('accordionchange', function(event, ui) {
+        $("#accordion").bind('accordionactivate', function(event, ui) {
             if ($(ui.newHeader).offset() != null){
                 $('html, body').animate({scrollTop: $(ui.newHeader).offset().top} );
             }
+			// if current panel is video;
+			// start
+			if($(ui.newPanel).find('video').length){
+				$('#mv').each(function(){
+					this.play();
+				});
+			}
         });
 
     });

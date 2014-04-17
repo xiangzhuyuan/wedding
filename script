@@ -1,0 +1,2143 @@
+<script>
+
+function addWinOnloadEvent(func) {
+  var oldonload = window.onload;
+  if (typeof window.onload != 'function') {
+    window.onload = func;
+  } else {
+    window.onload = function() {
+      if (oldonload) {
+        oldonload();
+      }
+      func();
+    }
+  }
+}
+
+</script>
+
+ <script>
+
+
+
+
+
+var invite_styletype = 1;
+
+function processButtonBackground(){
+
+	if (invite_styletype==1){
+		$("h3:visible>.button").each(function(index) {
+				$(this).attr('id', 'button' + (index + 1) )
+		});
+	}
+}
+
+function initProcessButtonBackground(){
+
+	if (invite_styletype==1){
+		$("h3:visible>.button").each(function(index) {
+				$(this).attr('id', 'button' + (index + 1) )
+		});
+	} else {
+		$("h3>.button").each(function(index) {
+				$(this).attr('id', $(this).attr('name') )
+		});
+	}
+
+
+}
+
+
+
+
+
+var dragFlag7158 = false;
+var start7158 = 0, end7158 = 0;
+
+function thisTouchStart7158(e)
+{
+    dragFlag7158 = true;
+    start7158 = e.touches[0].pageY;
+}
+
+function thisTouchEnd7158()
+{
+    dragFlag7158 = false;
+}
+
+function thisTouchMove7158(e)
+{
+    if ( !dragFlag7158 ) return;
+    end7158 = e.touches[0].pageY;
+    window.scrollBy( 0,( start7158 - end7158 ) );
+}
+
+
+
+
+
+	var map7158 = null;
+	var marker7158;
+	var map7158_latcenter = 31.235249;
+	var map7158_lngcenter = 121.50559099999998;
+	var map7158_latmarker = 31.235249;
+	var map7158_lngmarker = 121.50559099999998;
+
+
+	  function initialize7158() {
+		var myOptions = {
+			zoom: 16,
+			center: new google.maps.LatLng(map7158_latcenter, map7158_lngcenter),
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			mapTypeControl: false,
+			draggable: false,
+			mapTypeControlOptions: {
+				position: google.maps.ControlPosition.BOTTOM_RIGHT
+			}
+		}
+		map7158 = new google.maps.Map(document.getElementById("map_canvas7158"),
+									  myOptions);
+
+		 var image = new google.maps.MarkerImage('images/mobile_invite/map_marker.png',
+		  // This marker is 20 pixels wide by 32 pixels tall.
+		  new google.maps.Size(34, 34),
+		  // The origin for this image is 0,0.
+		  new google.maps.Point(0,0),
+		  // The anchor for this image is the base of the flagpole at 0,32.
+		  new google.maps.Point(17, 30));
+
+		//var image = 'marker_34x34.png';
+		var myLatLng = new google.maps.LatLng(map7158_latmarker, map7158_lngmarker);
+		marker7158 = new google.maps.Marker({
+			position: myLatLng,
+			map: map7158,
+			icon: image
+		});
+
+	  }
+
+	function setMapCenter7158(lat,lng) {
+		var pos = new google.maps.LatLng(lat,lng);
+		map7158.setCenter(pos);
+
+	}
+
+	function setMapZoom7158(zoom) {
+		map7158.setZoom(zoom);
+
+	}
+
+	function setMarkerPos7158(lat,lng) {
+		var pos = new google.maps.LatLng(lat,lng);
+		marker7158.setPosition(pos);
+
+	}
+
+
+
+
+
+
+var bReloadWebFontOnce = 1;
+
+$(document).ready(function() {
+	$("#accordion").accordion({ autoHeight: false },{ collapsible: true,active: false } );
+	//$("#accordion").accordion("activate",0);
+	//$("#accordion").accordion("activate","#accordion10");
+
+	$("#accordion").bind('accordionchange', function(event, ui) {
+         //   ui.newHeader // jQuery object, activated header
+         //   ui.oldHeader // jQuery object, previous header
+         //   ui.newContent // jQuery object, activated content
+         //   ui.oldContent // jQuery object, previous content
+	    //console.log(ui);
+       // console.log($("#accordion").accordion( "option", "active" ));
+			if ($(ui.newHeader).offset() != null){
+            	$('html, body').animate({scrollTop: $(ui.newHeader).offset().top} );
+			}
+
+	});
+
+
+			$("#accordion").bind('accordionchange', function(event, ui) {
+
+				if (ui.newContent.attr('id') == 'invite_detail_content7158' && !map7158 && $("#invite_detail_mapimgurl7158").val() == '' )
+				{
+					//alert("initialize7158");
+					initialize7158();
+				}
+
+
+			});
+
+			var mapCanvas = document.getElementById("map_canvas7158");
+
+			if (!mapCanvas.addEventListener) {
+				mapCanvas.attachEvent("touchstart", thisTouchStart7158, true);
+				mapCanvas.attachEvent("touchend", thisTouchEnd7158, true);
+				mapCanvas.attachEvent("touchmove", thisTouchMove7158, true);
+			} else {
+				mapCanvas.addEventListener("touchstart", thisTouchStart7158, true);
+				mapCanvas.addEventListener("touchend", thisTouchEnd7158, true);
+				mapCanvas.addEventListener("touchmove", thisTouchMove7158, true);
+			}
+
+
+
+});
+
+
+
+var bPlayVideo=1;
+
+function clickObj(o){
+//    alert('clicked');
+//	bPlayVideo=0;
+    var o = document.getElementById(o);
+
+    if( document.all){
+  		o.click();
+        //o.fireEvent("onclick");
+
+    }else{
+
+        var e = document.createEvent('MouseEvent');
+        e.initEvent('click', false, false);
+        o.dispatchEvent(e);
+    }
+
+  }
+
+
+</script>
+
+                      <script>
+<!--
+
+  function init(){
+
+
+  }
+
+  function isIns(){
+
+    var btn='';
+
+    if (document.iform.sum.value == '0'){
+
+        btn = ' 送 出 ';
+
+    }else{
+
+       btn = ' 修 改 ';
+
+    }
+
+
+    if( ! confirm('您确定要' + btn + '出席回函？')){
+
+        return false;
+
+    }else{
+
+        document.iform.submit();
+
+    }
+
+  }
+
+	function replaceAll(oldStr,findStr,repStr) {
+
+	  var srchNdx = 0;
+
+	  var newStr = "";
+	  while (oldStr.indexOf(findStr,srchNdx) != -1)
+	  {
+		newStr += oldStr.substring(srchNdx,oldStr.indexOf(findStr,srchNdx));
+		newStr += repStr;
+		srchNdx = (oldStr.indexOf(findStr,srchNdx) + findStr.length);
+	  }
+	  newStr += oldStr.substring(srchNdx,oldStr.length);
+
+	  return newStr;
+	}
+
+/*
+function getGlobalMobile(no) {
+	start = String(no.slice(0,1));
+	if (start == "+" ) {
+		return String(no.slice(1,no.length))
+	} else {
+		if (start == "0") {
+			return  "86" + String(no.slice(1,no.length))
+		} else {
+			return "86" + no
+		}
+	}
+}
+*/
+
+function getGlobalMobile(no) {
+	var tmp_no, inter_no;
+	var preset_cc = '86';
+	start = String(no.slice(0,1));
+	if (start == "+" ) {
+		tmp_no = String(no.slice(1,no.length)); //remove leading +
+		if ( String(tmp_no.slice(0,preset_cc.length)) == preset_cc && String(tmp_no.slice(preset_cc.length,preset_cc.length+1)) == '0' ) {
+			inter_no = preset_cc + String(tmp_no.slice(preset_cc.length + 1, tmp_no.length));
+		} else {
+			inter_no = tmp_no;
+		}
+	} else {
+		if (start == "0") {
+			inter_no = preset_cc + String(no.slice(1,no.length))
+		} else {
+			if ( String(no.slice(0,preset_cc.length)) == preset_cc ) {
+				if ( String(no.slice(preset_cc.length,preset_cc.length+1)) == '0'  ) {
+					inter_no = preset_cc + String(no.slice(preset_cc.length + 1, no.length));
+				} else {
+					inter_no =  no;
+				}
+			} else {
+				inter_no = preset_cc + no;
+			}
+		}
+	}
+	return inter_no;
+
+}
+
+
+	function checkMobileNumber( mo ) {
+
+
+
+		if (String(mo.slice(0,1)) == "+" ) {
+			if( isNaN(mo.slice(1,mo.length))) {
+				return false;
+			}
+			if( mo.length < 5) {
+				return false;
+			}
+		} else {
+			if( isNaN(mo)) {
+				return false;
+			}
+			if( mo.length < 6) {
+				return false;
+			}
+		}
+		return true
+	}
+
+  function isIns2(){
+
+
+    if( document.rform.remindname.value.length == 0){
+
+        alert('请输入姓名！');
+        document.rform.remindname.focus();
+        return false;
+
+    }
+
+    if( document.rform.remindphone.value.length == 0){
+
+        alert('请输入手机号！');
+        document.rform.remindphone.focus();
+        return false;
+
+    }
+
+/*
+    if( document.rform.remindphone.value.length != 10 || document.rform.remindphone.value.substring(0,2) != '09'){
+
+        alert('請輸入正確的手機號碼！');
+        document.rform.remindphone.focus();
+        return false;
+
+    }
+
+    if( ! confirm('您確定要送出簡訊提醒？')){
+
+        return false;
+
+    }else{
+
+        document.rform.submit();
+
+    }
+*/
+		mo = replaceAll( document.rform.remindphone.value, '-','');
+		mo = replaceAll( mo, ' ','');
+		mo = replaceAll( mo, '(','');
+		mo = replaceAll( mo, ')','');
+
+
+
+	if ( checkMobileNumber(mo) == false ) {
+		alert("您的手机号码格式不正确:");
+        document.rform.remindphone.focus();
+		return false;
+
+	} else {
+
+		//confirm mobile country code
+
+		if (String(mo.slice(0,1)) != "+" ) {
+			if(!confirm("系统自动判别以下手机号位于 [China / 中国]\n" + mo + "\n\n如果不是的话, 请在手机号前加上 +国码, \n例如,中国大陆(国码86)的手机号: 13061711111\n请输入: +86 13061711111")) {
+
+		        document.rform.remindphone.focus();
+				return false;
+			}
+		}
+		document.rform.remindphone_data.value = getGlobalMobile(mo)
+
+	}
+
+    document.rform.submit();
+
+
+
+  }
+
+
+-->
+</script>
+
+
+
+                      <script>
+<!--
+
+
+  function addRow(parent_node, maxid){
+
+
+
+    //取得屬於要應用新增列的區塊
+    var obj=document.getElementById( parent_node);
+    //取得目前有多少欄位
+    //var sIndex=obj.getElementsByTagName('div').length+1;
+    var sIndex = maxid;
+
+    //依照原表單格式,先建一個div
+    var div=document.createElement('div');
+    div.id = 's'+sIndex;
+
+    //再建立文字欄位,並指定相關屬性
+    var input=document.createElement('input');
+    input.type='radio';
+    input.name='t'+parent_node.replace('q', '');
+
+    var txt=document.createElement('span');
+    txt.id='o'+maxid;
+    txt.innerHTML = ' 新增选项';
+
+
+
+    div.appendChild(input);
+    div.appendChild(txt);
+
+    obj.appendChild(div);
+
+
+  }
+
+  function delRow(q, t){
+
+    d = document.getElementById(t);
+
+    d.parentNode.removeChild(d);
+
+  }
+
+
+  function setQuestionTitle(qq, txt){
+
+     document.getElementById('qq'+qq).innerHTML = txt;
+
+  }
+
+
+
+  function setOptionTitle(o, txt){
+
+    var range_array, inputstr, qid;
+    var leftstr, rightstr, midstr, leftpos, rightpos;
+    leftstr = '';
+    rightstr = '';
+    midstr = '';
+    leftpos = parseInt( txt.indexOf('{'));
+    rightpos = parseInt( txt.indexOf('}'));
+
+    inputstr = '';
+
+    qid = document.getElementById('o'+o).parentNode.parentNode.id.replace('q','');
+
+    if (leftpos >= 0 && rightpos > 0){
+
+        //是,{1-10}人 {}
+
+        leftstr = txt.substring(0, leftpos);
+        rightstr = txt.substring( rightpos+1, txt.length);
+        midstr = txt.substring( leftpos+1, rightpos);
+
+
+        if ( midstr == ''){
+
+            inputstr = '<input type="text" id="n' + qid + '" name="n' + qid + '" value="" size="10" onkeyup="setOptionValue( ' + qid + ', this.value, ' + txt + ')">';
+
+
+
+        //}else if ( midstr.indexOf('-') >= 0){
+        }else{
+
+
+			inputstr = '';
+			inputstr += '<select id="n' + qid + '" name="n' + qid + '" onchange="setOptionValue( ' + qid + ', this.value, ' + txt + ')">';
+			inputstr += '<option value="">请选择</option>';
+			option_array = midstr.split('|');
+			//alert(option_array.length);
+			cc = 1;
+			for (i = 0; i<option_array.length; i++){
+
+
+
+				range_array = option_array[i].split('-');
+
+
+				if (range_array.length==2) {
+					for (j = parseInt( range_array[0]); j<= parseInt(range_array[1]); j++) {
+						inputstr += '<option value="' + j + '">' + j + '</option>';
+						cc = cc + 1;
+					}
+				} else {
+					inputstr += '<option value="' + option_array[i] + '">' + option_array[i] + '</option>';
+				}
+
+				cc = cc + 1;
+
+			}
+            inputstr += '</select>';
+
+
+
+
+        }
+
+//alert(leftstr + inputstr + rightstr);
+        document.getElementById('o'+o).innerHTML = ' ' + leftstr + inputstr + rightstr;
+
+    }else{
+
+        document.getElementById('o'+o).innerHTML = ' ' + txt;
+    }
+
+
+
+  }
+
+  function updateSelect(parent_node, str){
+
+
+
+    var s = document.getElementById( parent_node.replace('q', 't'));
+
+    var arr = new Array();
+    arr = parent.document.getElementById( parent_node).getElementsByTagName('input');
+
+
+    s.options.length = 0;
+
+    s.options[0] = new Option('请选择', 0);
+    for (var i=0; i<arr.length; i++){
+
+        if (arr[i].value.Trim().length != 0){
+
+            s.options[i+1] = new Option( arr[i].value, arr[i].value);
+
+            if( arr[i].value == str) s.options[i+1].selected = true;
+
+        }
+    }
+
+  }
+
+  function showQuestion(parent_node, check){
+
+
+
+    if (check){
+
+       document.getElementById( parent_node.replace('q', 'ta')).style.display = 'block';
+
+
+    }else{
+
+       document.getElementById( parent_node.replace('q', 'ta')).style.display = 'none';
+
+    }
+
+    var n = 0;
+
+    //console.log($("#rsvptable tr[style*='display: block']"));
+
+
+
+    $("#rsvptable tr[style*='block']").each( function(n){
+      n++;
+
+      $(this).find("span:eq(0)").html(n);
+    });
+
+  }
+
+
+  function setOptionValue( id, txt, order){
+
+
+    var obj, obj2;
+
+    obj = eval('document.iform.q' + id);
+    obj.value = txt;
+
+    obj2 = eval('document.iform.t' + id);
+
+    for (var i=0; i<obj2.length; i++){
+
+        if (obj2[i].value == order){
+
+            obj2[i].checked = true;
+        }
+    }
+
+  }
+
+
+String.prototype.Trim = function() {
+
+  return this.replace(/(^\s*)|(\s*$)/g, "");
+
+}
+
+
+
+
+
+
+
+
+-->
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                             <script>
+	var audioPlayer; //initialize in $(window).load(function()
+
+	function setMusic(mp3Url) {
+		audioPlayer.pause();
+		if (mp3Url.length > 0 ){
+			audioPlayer.src = mp3Url;
+			audioPlayer.load();
+			audioPlayer.play();
+		}
+	}
+
+
+	function stopLoading(){
+		var LoadingDIV = document.getElementById("Loading");
+		LoadingDIV.style.display = "none";
+
+		audioPlayer = $("#xaudio")[0];
+
+
+
+
+	}
+
+
+	$(window).load(function() {
+
+		stopLoading();
+
+	});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+  var startX, startY
+
+// detect if touch event supported or not
+if ('ontouchstart' in document.documentElement) {
+  document.getElementById("invite_webimg").addEventListener("touchmove", handleMove, false);
+  document.getElementById("invite_webimg").addEventListener("touchend", handleEnd, false);
+  document.getElementById("invite_webimg").addEventListener("touchstart", handleStart, false);
+}
+
+  function handleStart(event){
+    //event.preventDefault();
+    var touch = event.touches[0];
+    startX = parseInt( touch.pageX);
+    startY = parseInt( touch.pageY);
+
+    //alert(startX + ' ' + startY);
+  }
+
+  function handleEnd(event){
+
+
+
+  }
+
+  function handleMove(event){
+
+    //event.preventDefault();
+    var x, y;
+
+
+         var touch = event.touches[0];
+         x = parseInt( touch.pageX) - startX;
+         y = parseInt( touch.pageY) - startY;
+
+    if ($("#Gallery li").size() > 0){
+
+        if ((Math.abs(x) > Math.abs(y)) && (Math.abs(x) > 150) ){
+
+		        instance.show(0);
+		    }
+		}
+
+  }
+
+	// default mv parameter
+  var invite_mediatype = 1;
+	var invite_preview_objurl;
+	var invite_preview_usrdata;
+
+
+
+		// default mv parameter
+		invite_preview_objurl = 'swf/1558.swf';
+		invite_preview_usrdata = 'web/getuserdata_embed.asp?embedid=F9BR8';
+
+
+
+/*
+	$(document).ready(function() {
+			//init
+			if (invite_mediatype == 1) {
+				$( "#img_videobutton").show();
+				$( "#img_videobutton_placeholder").show();
+			} else {
+				$( "#img_videobutton").hide();
+				$( "#img_videobutton_placeholder").hide();
+			}
+
+	});
+*/
+
+
+	$(function() {
+			//if (invite_mediatype == 1) {
+			//	$( "#img_decoration1,#img_decoration2,#img_decoration3").css('cursor', 'pointer');
+			//} else {
+			//	$( "#img_decoration1,#img_decoration2,#img_decoration3").css('cursor', 'default');
+			//}
+
+
+
+
+
+			$( "#img_videobutton" ).click(function() {
+				//alert("playVideo");
+				if (invite_mediatype == 1) {
+
+						window.location = 'http://youvivid-streaming.oss-cn-hangzhou.aliyuncs.com/IVT_template/Q6jR42RbqES1_ajtNuuTrQ.mp4';
+
+				}
+
+
+				return false;
+			});
+
+
+
+			if ($("#Gallery li").size() > 0){
+
+			   	$( "#invite_webimg,#img_decoration1,#img_decoration2,#img_decoration3").css('cursor', 'pointer');
+			}else{
+  	     		$( "#invite_webimg,#img_decoration1,#img_decoration2,#img_decoration3").css('cursor', 'default');
+			}
+
+			$( "#invite_webimg,#img_decoration1,#img_decoration2,#img_decoration3" ).click(function() {
+
+
+				if ($("#Gallery li").size() > 0){
+
+				     //alert($("#Gallery a:first").html());
+				     //$("#Gallery a:first").click();
+				     instance.show(0);
+				}
+
+
+				return false;
+			});
+
+
+
+
+	});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                       <script>
+
+	//?建求XMLHttpRequest?象
+	function createRequest() {
+		try {
+			request = new XMLHttpRequest();
+		} catch (trymicrosoft) {
+			try {
+				request = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (othermicrosoft) {
+				try {
+					request = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (failed) {
+					request = false;
+				}
+			}
+		}
+		if (!request)
+			alert("ERROR XMLHttpRequest!");
+	}
+
+
+
+	function reloadWebFont(){
+		var webfontinfo_array = ['粗钢笔|粗钢笔1|http://42.121.32.43:8080/Fonts/csslink?family=%E7%B2%97%E9%92%A2%E7%AC%941&font=%E7%B2%97%E9%92%A2%E7%AC%94|2','隶书|隶书1|http://42.121.32.43:8080/Fonts/csslink?family=%E9%9A%B6%E4%B9%A61&font=%E9%9A%B6%E4%B9%A6|2','粗圆|粗圆1|http://42.121.32.43:8080/Fonts/csslink?family=%E7%B2%97%E5%9C%861&font=%E7%B2%97%E5%9C%86|2','古印体|古印体1|http://42.121.32.43:8080/Fonts/csslink?family=%E5%8F%A4%E5%8D%B0%E4%BD%931&font=%E5%8F%A4%E5%8D%B0%E4%BD%93|2','粗广告体|粗广告体1|http://42.121.32.43:8080/Fonts/csslink?family=%E7%B2%97%E5%B9%BF%E5%91%8A%E4%BD%931&font=%E7%B2%97%E5%B9%BF%E5%91%8A%E4%BD%93|2','黑体|黑体1|http://42.121.32.43:8080/Fonts/csslink?family=%E9%BB%91%E4%BD%931&font=%E9%BB%91%E4%BD%93|2','中行书|中行书1|http://42.121.32.43:8080/Fonts/csslink?family=%E4%B8%AD%E8%A1%8C%E4%B9%A61&font=%E4%B8%AD%E8%A1%8C%E4%B9%A6|2','书宋二|书宋二1|http://42.121.32.43:8080/Fonts/csslink?family=%E4%B9%A6%E5%AE%8B%E4%BA%8C1&font=%E4%B9%A6%E5%AE%8B%E4%BA%8C|2','粗行楷体|粗行楷体1|http://42.121.32.43:8080/Fonts/csslink?family=%E7%B2%97%E8%A1%8C%E6%A5%B7%E4%BD%931&font=%E7%B2%97%E8%A1%8C%E6%A5%B7%E4%BD%93|2','甜妞体|甜妞体1|http://42.121.32.43:8080/Fonts/csslink?family=%E7%94%9C%E5%A6%9E%E4%BD%931&font=%E7%94%9C%E5%A6%9E%E4%BD%93|2'];
+		var htmltext = $("#invite_detail_editor7155").html();
+		plaintext = htmltext.replace( /(<[^<|>]+?>|\r\n|\n|\r|^\s*|\s*$|\s+|&nbsp;)/gim,'' );
+
+		plaintext_array_inorder = plaintext.split('').sort();
+
+		if (plaintext_array_inorder.length > 0) {
+			plaintext_min = plaintext_array_inorder[0];
+			prechr = plaintext_array_inorder[0];
+			for (i=1; i<plaintext_array_inorder.length; i++){
+				if (plaintext_array_inorder[i] != prechr){
+					prechr = plaintext_array_inorder[i];
+					plaintext_min = plaintext_min + plaintext_array_inorder[i];
+				}
+			}
+		} else {
+			plaintext_min = "";
+		}
+
+
+		contentcss_list = "";
+		//alert(webfontinfo_array);
+
+		for ( cc=0; cc < webfontinfo_array.length ; cc++) {
+
+			tmp_webfontname = webfontinfo_array[cc].split('|')[0];
+		//	alert(tmp_webfontname);
+			tmp_webfont = webfontinfo_array[cc].split('|')[1];
+			tmp_webfonturl = webfontinfo_array[cc].split('|')[2];
+			tmp_webfonttype = webfontinfo_array[cc].split('|')[3];
+
+			if (  htmltext.toUpperCase().indexOf(tmp_webfont.toUpperCase()) >= 0 ) {
+				var_text = plaintext_min;
+				if (tmp_webfonttype==1 ) {
+					$(document).find('head').append('<link class="fontcss_detail" id="' + tmp_webfont + '" rel="stylesheet" type="text/css" href="'+ tmp_webfonturl + "&text=" + encodeURIComponent(var_text) +'">');
+				} else if (tmp_webfonttype==3 ) { //google webfont pure english,  no text parameter
+					$(document).find('head').append('<link class="fontcss_detail" id="' + tmp_webfont + '" rel="stylesheet" type="text/css" href="'+ tmp_webfonturl +'">');
+				}else{
+					post_url = tmp_webfonturl.split('?')[0];
+					post_vars = tmp_webfonturl.split('?')[1] + "&text=" + encodeURIComponent(var_text);
+					createRequest();
+					//post_url = "http://cn.youvivid.com/test_test.asp";
+					//alert(parseInt($.browser.version, 10));
+
+
+						if($.browser.msie && parseInt($.browser.version, 10) <= 8) {
+							post_url = "http://cn.youvivid.com/mobile_invite_getcontentcssurl.asp";
+						} else {
+							post_url = "http://42.121.32.43:8080/Fonts/csslink";
+						}
+
+
+
+
+					//alert(post_url);
+					request.open("POST", post_url, false);
+
+					request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					//alert(post_url+"," + post_vars);
+					request.send(post_vars);
+					post_response = request.responseText; //?取服?器返回的JSON字串
+
+				//	alert("post_response=" + post_response);
+					// this is for testing
+					//$(document).find('head').append('<link class="fontcss_detail" id="' + tmp_webfont + '" rel="stylesheet" type="text/css" href="'+ tmp_webfonturl + "&text=" + encodeURIComponent(var_text) +'">');
+					$(document).find('head').append('<link class="fontcss_detail" id="' + tmp_webfont + '" rel="stylesheet" type="text/css" href="'+ post_response +'">');
+
+				}
+			}else{
+				var_text = tmp_webfontname ;
+				if (tmp_webfonttype==1 ) {
+					$(document).find('head').append('<link class="fontcss_detail" id="' + tmp_webfont + '" rel="stylesheet" type="text/css" href="'+ tmp_webfonturl + "&text=" + encodeURIComponent(var_text) +'">');
+
+
+
+				}else{
+					$(document).find('head').append('<link class="fontcss_detail" id="' + tmp_webfont + '" rel="stylesheet" type="text/css" href="">');
+
+				}
+			}//if (  htmltext.toUpperCase().indexOf(tmp_webfont.toUpperCase()) >= 0 ) {
+		}
+	} //end	function reloadWebFont(){
+
+
+
+	$(document).ready(function() {
+
+		reloadWebFont();
+
+		bReloadWebFontOnce = 0;
+
+
+	});
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+	$(function() {
+		$('#xvideo18355').bind('play', function (e) {
+				if (!audioPlayer.paused) {
+					audioPlayer.pause();
+				}
+		});
+	});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <script>
+
+    var options, instance;
+
+	// Set up PhotoSwipe with all anchor tags in the Gallery container
+
+
+		(function(window, $, PhotoSwipe){
+
+			$(document).ready(function(){
+
+				options = {target:$("#PhotoSwipeTarget",parent.document.body) , allowUserZoom: false
+					,captionAndToolbarAutoHideDelay: 0
+				  //  ,preventHide: true
+				};
+				if ($('#Gallery li').size() > 0){
+					instance =  $("#Gallery a").photoSwipe(options);
+    					// onBeforeShow
+					instance.addEventHandler(PhotoSwipe.EventTypes.onBeforeShow, function(e){
+
+						//alert('onbeforeshow');
+
+						parent.showDialog();
+
+
+					});
+
+					// onSlideshowStop
+					instance.addEventHandler( window.Code.PhotoSwipe.EventTypes.onBeforeHide, function(e){
+					//alert('onBeforeHide');
+					parent.closeDialog();
+					});
+				}
+			});
+
+
+		}(window, window.jQuery, window.Code.PhotoSwipe));
+
+
+
+/*
+
+
+		(function(window, PhotoSwipe){
+
+			document.addEventListener('DOMContentLoaded', function(){
+
+
+					options = {target: parent.window.document.querySelectorAll('#PhotoSwipeTarget')[0], allowUserZoom: false
+					    ,captionAndToolbarAutoHideDelay: 0
+					  //  ,preventHide: true
+					};
+
+					if ($('#Gallery li').size() > 0){
+
+    					instance = PhotoSwipe.attach( window.document.querySelectorAll('#Gallery a'), options );
+
+
+    					// onBeforeShow
+    					instance.addEventHandler(PhotoSwipe.EventTypes.onBeforeShow, function(e){
+
+							//alert('onbeforeshow');
+
+							parent.showDialog();
+
+
+    					});
+
+						// onSlideshowStop
+						instance.addEventHandler( window.Code.PhotoSwipe.EventTypes.onBeforeHide, function(e){
+      					//alert('onBeforeHide');
+      					parent.closeDialog();
+	      				});
+
+				  }
+
+			}, false);
+
+
+
+		}(window, window.Code.PhotoSwipe));
+
+*/
+
+
+
+		function addPhotoSwipe(fileid, thumbnailurl, fileurl, photocount){
+
+
+            //var li = $('<li/>').append( $('<a/>')
+            //  .attr('href', fileurl)
+            //  .append(
+            //    $('<img />').attr('id', fileid).attr('src', thumbnailurl).attr('alt', '')
+            //  )).appendTo('ul#Gallery');
+            var li = $('<li/>').append( $('<a/>').attr('href', fileurl)
+              .append($('<div class="thumb" />').attr('id', fileid).css('background-image', 'url('+thumbnailurl+')')
+              .append($('<img />').attr('src', 'images/spacer.gif').attr('width', '100%')
+              ))).appendTo('ul#Gallery');
+
+
+            if ($("#Gallery li").size() == photocount){
+/*
+		var cw = $('.gallery').width() * 0.333 ;
+				alert("addphoto: cw="+cw + ", gallery width=" + $('.gallery').width());
+		//$('.gallery li').css({
+		//	'height': cw + 'px'
+		//});
+		$('.gallery li a .thumb').css({
+			'height': cw + 'px'
+		});
+*/
+
+
+					options = {target:$("#PhotoSwipeTarget",parent.document.body) , allowUserZoom: false
+						,captionAndToolbarAutoHideDelay: 0
+					  //  ,preventHide: true
+					};
+
+					instance =  $("#Gallery a").photoSwipe(options);
+
+					// onBeforeShow
+					instance.addEventHandler( window.Code.PhotoSwipe.EventTypes.onBeforeShow, function(e){
+
+						//alert('onbeforeshow');
+
+						parent.showDialog();
+
+					});
+
+					// onSlideshowStop
+					instance.addEventHandler( window.Code.PhotoSwipe.EventTypes.onBeforeHide, function(e){
+						//alert('onBeforeHide');
+						parent.closeDialog();
+					});
+
+            }
+    }
+
+    function instance_hide(){
+        //alert('hide');
+
+        instance.hide(0);
+        //window.Code.PhotoSwipe.activeInstances[0].instance.hide(0);
+
+
+
+
+
+
+    }
+
+	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+	$(function() {
+		$('#inviteurl').click(function(){
+				if($.browser.msie) this.createTextRange().select();
+				else {
+					this.selectionStart = 0;
+					this.selectionEnd = this.value.length;
+				}
+		});
+	})
+</script>
