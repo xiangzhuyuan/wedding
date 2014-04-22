@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <title>add rsvp</title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</header>
+<body>
+<form id="myform" role="form" action="insertdata.php" method="post">
+    <div class="form-group">
+        <label for="name">name</label>
+        <input type="text" class="form-control" id="name" name='name' placeholder="name">
+    </div>
+    <div class="form-group">
+        <label for="name">cellphone</label>
+        <input type="text" class="form-control" id="cellphone" name='cellphone' placeholder="cellphone">
+    </div>
+    <div class="form-group">
+        <label class="checkbox-inline">
+            <input type="checkbox" name="iscome" id="iscome">
+            <span> do you come?</span>
+        </label>
+    </div>
+    <div class="form-group" id="more" style="display: none">
+        <div class="form-group">
+            <span>How many people come with you?</span>
+            <select name="count" id="count" class="form-control">
+                <option value="1" selected="selected">one</option>
+                <option value="2">two</option>
+                <option value="3">three</option>
+                <option value="4">four</option>
+                <option value="5">five</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="checkbox-inline">
+                <input type="checkbox" name="needpaper" id="needpaper"/>
+                <span>do you need post paper invitations?</span>
+            </label>
+            <input type="text" name="address" id="address" placeholder="address" style="display: none"
+                   class="form-control"/>
+
+        </div>
+        <div class="form-group">
+            <label class="checkbox-inline">
+                <input type="checkbox" name="needbook" id="needbook"/>
+                <span>do you need us book the room for you?</span>
+            </label>
+            <input class="form-control" type="date" name="start-date" id="start-date" placeholder="start date"
+                   style="display: none"/>
+            <input class="form-control" type="date" name="end-date" id="end-date" placeholder="end date"
+                   style="display: none"/>
+            <input class="form-control" type="text" name="remark" id="remark" placeholder="remark"
+                   style="display: none"/>
+
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" id="note" name="note" placeholder="Give us your blessing"></textarea>
+        </div>
+    </div>
+    <input type="submit" value="Send" />
+</form>
+
+<script type="text/javascript">
+    $(function () {
+        $('#iscome').click(function () {
+            $('#more').toggle(this.checked);
+            if(!this.checked)
+            {
+                $('#more').find('input, select, textarea').each(function(){
+                    var $item = $(this);
+                    $item.val('');
+                });
+            }
+        });
+        $('#needpaper').click(function () {
+            $('#address').toggle(this.checked);
+        });
+        $('#needbook').click(function () {
+            $('#start-date').toggle(this.checked);
+            $('#end-date').toggle(this.checked);
+            $('#remark').toggle(this.checked);
+        });
+
+        // variable to hold request
+        var request;
+        // bind to the submit event of our form
+        $("#myform").submit(function (event) {
+            // abort any pending request
+            if (request) {
+                request.abort();
+            }
+            // setup some local variables
+            var $form = $(this);
+            // let's select and cache all the fields
+            var $inputs = $form.find("input, select, button, textarea");
+            // serialize the data in the form
+            var serializedData = $form.serialize();
+
+            // let's disable the inputs for the duration of the ajax request
+            // Note: we disable elements AFTER the form data has been serialized.
+            // Disabled form elements will not be serialized.
+            $inputs.prop("disabled", true);
+
+            // fire off the request to /form.php
+            request = $.ajax({
+                url: "insertdata_local.php",
+                type: "post",
+                data: serializedData
+            });
+
+            // callback handler that will be called on success
+            request.done(function (response, textStatus, jqXHR) {
+                // log a message to the console
+                console.log("Hooray, it worked!");
+                console.log(response);
+                console.log(textStatus);
+
+
+            });
+
+            // callback handler that will be called on failure
+            request.fail(function (jqXHR, textStatus, errorThrown) {
+                // log the error to the console
+                console.error(
+                        "The following error occured: " +
+                                textStatus, errorThrown
+                );
+            });
+
+            // callback handler that will be called regardless
+            // if the request failed or succeeded
+            request.always(function () {
+                // reenable the inputs
+                $inputs.prop("disabled", false);
+            });
+
+            // prevent default posting of form
+            event.preventDefault();
+        });
+
+    });
+
+
+</script>
+
+</body>
+</html>
